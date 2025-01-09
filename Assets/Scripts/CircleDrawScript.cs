@@ -8,31 +8,22 @@ public class CircleDrawScript : MonoBehaviour
     public float RotationSpeedMulti;
     public Vector3 center = Vector3.zero;
     private float angle = 0f;  
-    public TrailRenderer trailRenderer;
-    public SpriteRenderer pencilCircle;
-
-    public Color color;
-    public bool useTrail;
-
+    
     void Start()
     {
-        if(useTrail)
-        {
-            trailRenderer.enabled = true;
-        }
+
     }
     void FixedUpdate()
     {
-        if(useTrail)
+        if(baseCircle != null)
         {
-            trailRenderer.startColor = color;
-            pencilCircle.color = color;
+            center = baseCircle.transform.position;
+            baseCircleRadius = baseCircle.transform.localScale.x / 2 - gameObject.transform.localScale.x / 2;
         }
-
-
-
-        center = baseCircle.transform.position;
-        baseCircleRadius = baseCircle.transform.localScale.x / 2 - gameObject.transform.localScale.x / 2;
+        else
+        {
+            baseCircleRadius = 0;
+        }
 
         angle += speed * Time.fixedDeltaTime;
         if (angle >= 360f) angle -= 360f;
