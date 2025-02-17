@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PencilConfig : MonoBehaviour
 {
-    private TrailRenderer trailRenderer;
+    public TrailRenderer trailRenderer;
     private SpriteRenderer pencilCircle;
     public Color color;
 

@@ -1,0 +1,1 @@
+C:\Users\ursid\Documentos\Projetos\Unity\CirclePattern-IdleGame\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\build\intermediates\cxx\RelWithDebInfo\65d5t4k3\obj\arm64-v8a
