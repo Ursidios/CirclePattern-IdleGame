@@ -6,9 +6,10 @@ public class SettingsScript : MonoBehaviour
 {
     public GameObject postProcessing;
     public Toggle postProcessingToggle;
+    public SaveGameScript saveGameScript;
     public void DeleteAllProgress()
     {
-        PlayerPrefs.DeleteAll();
+        saveGameScript.DeleteSaveFiles();
         SceneManager.LoadScene(0);
     }
 
@@ -19,14 +20,14 @@ public class SettingsScript : MonoBehaviour
 
     void OnApplicationQuit()  
     {  
-        PlayerPrefs.Save();  
+        saveGameScript.SaveAll();
     }  
     
     void OnApplicationPause(bool pause)  
     {  
         if (pause)  
         {  
-            PlayerPrefs.Save();  
+            saveGameScript.SaveAll();
         }  
     }
 }

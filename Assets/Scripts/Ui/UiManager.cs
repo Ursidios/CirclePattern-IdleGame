@@ -15,7 +15,7 @@ public class UiManager : MonoBehaviour
     public float zoomAmount;
 
     public PlayerConfig playerConfig;
-    public UpgradeManager upgradeManager;
+    public SaveGameScript saveGameScript;
 
 
     public void EnableShopUI()
@@ -87,8 +87,8 @@ public class UiManager : MonoBehaviour
     {
         targetFOV -= zoomAmount;
 
-        upgradeManager.SavePlayerPrefs();
-        playerConfig.SavePlayerPrefs();
+        saveGameScript.SaveAll();
+        //playerConfig.SavePlayerPrefs();
         //upgradeManager.SavePlayerData();
     }
 
@@ -96,8 +96,9 @@ public class UiManager : MonoBehaviour
     {
         targetFOV += zoomAmount;
 
-        upgradeManager.SavePlayerPrefs();
-        playerConfig.SavePlayerPrefs();
+        saveGameScript.SaveAll();
+
+        //playerConfig.SavePlayerPrefs();
         //upgradeManager.SavePlayerData();
     }
 }
