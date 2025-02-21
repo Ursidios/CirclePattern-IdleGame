@@ -6,14 +6,11 @@ public class UIScript : MonoBehaviour
 {
     public PlayerConfig playerConfig;
     public TMP_Text moneyText;   
+    public TMP_Text specialMoneyText;   
 
     public UpgradeManager upgradeManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        upgradeManager.upgrades[5].buttons.SetActive(false);
-    }
 
     // Update is called once per frame
     void Update()
@@ -30,5 +27,6 @@ public class UIScript : MonoBehaviour
             upgradeManager.upgrades[3].buttons.SetActive(false);
         }
         moneyText.text = playerConfig.money.ToString("0");
+        specialMoneyText.text = playerConfig.moneySpecial.ToString("0");
     }
 }

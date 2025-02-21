@@ -3,6 +3,7 @@ using UnityEngine;
 public class CircleDrawScript : MonoBehaviour
 {
     public GameObject baseCircle;
+    public GameObject drawPencil;
     public float baseCircleRadius;
     public float speed = 1f;
     public float RotationSpeedMulti;

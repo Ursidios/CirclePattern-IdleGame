@@ -14,44 +14,16 @@ public class UpgradeManager : MonoBehaviour
     void Start()
     {
         playerConfig = GetComponent<PlayerConfig>();
-        savePath = Path.Combine(Application.persistentDataPath, "upgradeData.json");
-        //LoadPlayerPrefs();
-        
-        UpdateUI();
+        savePath = Path.Combine(Application.persistentDataPath, "upgradeData.json");   
+       
     }
-
-    // public void LoadPlayerPrefs()
-    // {
-    //     if (File.Exists(savePath))
-    //     {
-    //         string json = File.ReadAllText(savePath);
-    //         print(savePath);
-    //         UpgradeData data = JsonUtility.FromJson<UpgradeData>(json);
-            
-    //         for (int i = 0; i < upgrades.Length; i++)
-    //         {
-    //             upgrades[i].moneyCost = data.upgrades[i].moneyCost;
-    //             upgrades[i].level = data.upgrades[i].level;
-    //             upgrades[i].maxLevel = data.upgrades[i].maxLevel;
-    //             upgrades[i].moneyPercentageIncrease = data.upgrades[i].moneyPercentageIncrease;
-    //             upgrades[i].inflationPercentageCost = data.upgrades[i].inflationPercentageCost;
-    //         }
-            
-    //         playerConfig.pencilConfig.trailRenderer.time = data.trailDuration;
-    //         uiManager.MainCamera.fieldOfView = data.fieldOfView;
-    //     }
-    // }
-
-    // public void SavePlayerPrefs()
-    // {
-    //     UpgradeData data = new UpgradeData();
-    //     data.upgrades = upgrades;
-    //     data.trailDuration = playerConfig.pencilConfig.trailRenderer.time;
-    //     data.fieldOfView = uiManager.MainCamera.fieldOfView;
-        
-    //     string json = JsonUtility.ToJson(data, true);
-    //     File.WriteAllText(savePath, json);
-    // }
+    void Update()
+    {
+        foreach (var upgrade in upgrades)
+        {
+            upgrade.textCost.text = upgrade.moneyCost.ToString("$0.0");
+        }
+    }
 
     public void IncreaseSpeed(int index)
     {
@@ -76,7 +48,7 @@ public class UpgradeManager : MonoBehaviour
         if (!MoneyComparison(2))
             return;
 
-        playerConfig.pencilConfig.trailRenderer.time += 1;
+        PencilConfig.trailDuration += 1;
         playerConfig.IncreaseMoneyMult(10);
     }
 
@@ -118,20 +90,11 @@ public class UpgradeManager : MonoBehaviour
             playerConfig.money -= upgrades[UpgradeIndex].moneyCost;
             upgrades[UpgradeIndex].moneyCost += upgrades[UpgradeIndex].moneyCost * (upgrades[UpgradeIndex].inflationPercentageCost / 100f);
             upgrades[UpgradeIndex].level++;
-            UpdateUI();
-            //SavePlayerPrefs();
+
             saveGameScript.SaveAll();
             return true;
         }
         return false;
-    }
-
-    public void UpdateUI()
-    {
-        foreach (var upgrade in upgrades)
-        {
-            upgrade.textCost.text = upgrade.moneyCost.ToString("$0.0");
-        }
     }
 }
 
@@ -146,12 +109,4 @@ public class Upgrades
     public float moneyPercentageIncrease;
     public float inflationPercentageCost;
     public GameObject buttons;
-}
-
-[Serializable]
-public class UpgradeData
-{
-    public Upgrades[] upgrades;
-    public float fieldOfView;
-    public float trailDuration;
 }
