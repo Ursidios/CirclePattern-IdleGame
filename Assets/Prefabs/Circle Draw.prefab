@@ -317,3 +317,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trailRenderer: {fileID: 0}
   color: {r: 1, g: 0.63016504, b: 0, a: 1}
+  isMainDraw: 0

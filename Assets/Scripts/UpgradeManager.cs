@@ -6,6 +6,7 @@ using UnityEngine;
 public class UpgradeManager : MonoBehaviour
 {
     private PlayerConfig playerConfig;
+    public UIScript uIScript;
     public UiManager uiManager;
     public Upgrades[] upgrades;
     private string savePath;
@@ -25,13 +26,14 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-    public void IncreaseSpeed(int index)
+    public void TimeSpeed(int index)
     {
         if (!MoneyComparison(0))
             return;
-        
-        playerConfig.drawCirclesInGameList[index].GetComponent<CircleDrawScript>().speed += 0.5f;
-        playerConfig.IncreaseMoneyMult(10);
+
+        uIScript.EnableTimeSpeedButton();
+        uIScript.timeSpeedTimerMax += 5;
+        playerConfig.IncreaseMoneyMult(upgrades[0].moneyPercentageIncrease);
     }
 
     public void IncreaseRotationSpeed(int index)
@@ -40,7 +42,7 @@ public class UpgradeManager : MonoBehaviour
             return;
 
         playerConfig.drawCirclesInGameList[index].GetComponent<CircleDrawScript>().RotationSpeedMulti += 0.5f;
-        playerConfig.IncreaseMoneyMult(10);
+        playerConfig.IncreaseMoneyMult(upgrades[1].moneyPercentageIncrease);
     }
 
     public void IncreaseDrawDuration()
@@ -49,7 +51,7 @@ public class UpgradeManager : MonoBehaviour
             return;
 
         PencilConfig.trailDuration += 1;
-        playerConfig.IncreaseMoneyMult(10);
+        playerConfig.IncreaseMoneyMult(upgrades[2].moneyPercentageIncrease);
     }
 
     public void IncreaseCircleSize()
@@ -58,7 +60,7 @@ public class UpgradeManager : MonoBehaviour
             return;
 
         playerConfig.circlesInGameList[playerConfig.circleAmount - 1].transform.localScale += new Vector3(1, 1, 1);
-        playerConfig.IncreaseMoneyMult(10);
+        playerConfig.IncreaseMoneyMult(upgrades[4].moneyPercentageIncrease);
         uiManager.ZoomOutButton();
     }
 
@@ -68,7 +70,7 @@ public class UpgradeManager : MonoBehaviour
             return;
 
         playerConfig.SpawnCircle(new Vector3(1, 1, 1));
-        playerConfig.IncreaseMoneyMult(50);
+        playerConfig.IncreaseMoneyMult(upgrades[3].moneyPercentageIncrease);
         upgrades[4].level = 0;
         uiManager.ZoomOutButton();
         uiManager.ZoomOutButton();
@@ -80,7 +82,7 @@ public class UpgradeManager : MonoBehaviour
             return;
 
         playerConfig.SpawnDrawCircle();
-        playerConfig.IncreaseMoneyMult(50);
+        playerConfig.IncreaseMoneyMult(upgrades[5].moneyPercentageIncrease);
     }
 
     public bool MoneyComparison(int UpgradeIndex)

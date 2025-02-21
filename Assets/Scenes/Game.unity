@@ -6069,7 +6069,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 198.1, y: -540}
+  m_AnchoredPosition: {x: 733.1, y: -325}
   m_SizeDelta: {x: 335, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &528515189
@@ -6416,15 +6416,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ba26616f43e0b4fb3e2da11f2fcd7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uIScript: {fileID: 1908223143}
   uiManager: {fileID: 1908223141}
   upgrades:
-  - name: Speed
-    moneyCost: 10
+  - name: Time
+    moneyCost: 5000
     level: 0
     maxLevel: 5
     textCost: {fileID: 1679115355}
-    moneyPercentageIncrease: 5
-    inflationPercentageCost: 5
+    moneyPercentageIncrease: 0
+    inflationPercentageCost: 50
     buttons: {fileID: 1743894521}
   - name: Rotation Speed
     moneyCost: 15
@@ -6478,7 +6479,7 @@ MonoBehaviour:
     maxLevel: 0
     textCost: {fileID: 1740822552}
     moneyPercentageIncrease: 0
-    inflationPercentageCost: 2
+    inflationPercentageCost: 200
     buttons: {fileID: 1142589367}
   - name: Shooting Star
     moneyCost: 50
@@ -6809,6 +6810,7 @@ RectTransform:
   - {fileID: 1566858549}
   - {fileID: 53258275}
   - {fileID: 1655189931}
+  - {fileID: 1293436334}
   - {fileID: 766955746}
   m_Father: {fileID: 1908223142}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7609,7 +7611,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 198.1, y: -755}
+  m_AnchoredPosition: {x: 733.1, y: -540}
   m_SizeDelta: {x: 335, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &893759700
@@ -9568,7 +9570,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 733.1, y: -540}
+  m_AnchoredPosition: {x: 198.1, y: -540}
   m_SizeDelta: {x: 335, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1224876744
@@ -9700,6 +9702,173 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 6f6ed1b68db4cb842ab550185511cdb3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &1293436333
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1293436334}
+  - component: {fileID: 1293436337}
+  - component: {fileID: 1293436336}
+  - component: {fileID: 1293436335}
+  - component: {fileID: 1293436338}
+  m_Layer: 5
+  m_Name: Time Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1293436334
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293436333}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.39999998, y: 0.39999998, z: 0.39999998}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 630984066}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -360, y: 212}
+  m_SizeDelta: {x: 256, y: 256}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &1293436335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293436333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1293436336}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1293436338}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ButtonPressed
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1908223143}
+        m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
+        m_MethodName: ActiveTimeSpeed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &1293436336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293436333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0.6745098, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 3185349594806368453, guid: 64e618e05bbea5a42b82548f257ff00b, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1293436337
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293436333}
+  m_CullTransparentMesh: 1
+--- !u!95 &1293436338
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293436333}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 659678ec05c8f8f43b4b78f36c5567ae, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -10533,11 +10702,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1743894522}
   - {fileID: 2113868836}
   - {fileID: 528515188}
   - {fileID: 1224876743}
   - {fileID: 893759699}
+  - {fileID: 1743894522}
   m_Father: {fileID: 2121855234}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -11293,7 +11462,7 @@ GameObject:
   - component: {fileID: 1743894523}
   - component: {fileID: 1743894526}
   m_Layer: 5
-  m_Name: Speed Button
+  m_Name: Time Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11317,7 +11486,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 198.1, y: -325}
+  m_AnchoredPosition: {x: 198.1, y: -755}
   m_SizeDelta: {x: 335, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1743894523
@@ -11366,7 +11535,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 614964598}
         m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
-        m_MethodName: IncreaseSpeed
+        m_MethodName: TimeSpeed
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11814,7 +11983,12 @@ MonoBehaviour:
   playerConfig: {fileID: 614964596}
   moneyText: {fileID: 719081431}
   specialMoneyText: {fileID: 1942767922}
+  timeSpeedButton: {fileID: 1293436333}
   upgradeManager: {fileID: 614964598}
+  timeSpeedOn: 0
+  timeSpeedTimerMax: 10
+  blockTimeSpeed: 0
+  blockTimeSpeedTimerMax: 30
 --- !u!1 &1913157007
 GameObject:
   m_ObjectHideFlags: 0
@@ -12720,7 +12894,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Speed
+  m_text: Time
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12837,7 +13011,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 733.1, y: -325}
+  m_AnchoredPosition: {x: 198.1, y: -325}
   m_SizeDelta: {x: 335, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2113868837

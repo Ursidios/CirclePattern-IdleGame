@@ -12,6 +12,8 @@ public class SaveGameScript : MonoBehaviour
     private PlayerConfig playerConfig;
     private UpgradeManager upgradeManager;
     private StarSpawner starSpawner;
+    private CosmeticUpgradesManager cosmeticUpgradesManager;
+    private UIScript uIScript;
 
     void Start()
     {
@@ -21,6 +23,9 @@ public class SaveGameScript : MonoBehaviour
         playerConfig = FindObjectOfType<PlayerConfig>();
         upgradeManager = FindObjectOfType<UpgradeManager>();
         starSpawner = FindObjectOfType<StarSpawner>();
+        cosmeticUpgradesManager = FindObjectOfType<CosmeticUpgradesManager>();
+        uIScript = FindObjectOfType<UIScript>();
+
         LoadPlayer();
         LoadUpgrades();
         LoadCosmeticUpgrades();
@@ -36,7 +41,8 @@ public class SaveGameScript : MonoBehaviour
     {
         CosmeticUpgradeData data = new CosmeticUpgradeData
         {
-            starCount = starSpawner.collectedStars,            
+            starCount = starSpawner.collectedStars,   
+            drawCircleCount = cosmeticUpgradesManager.cosmeticUpgrades[0].level
         };
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(cosmeticUpgradeSavePath, json);
@@ -52,6 +58,12 @@ public class SaveGameScript : MonoBehaviour
             {
                 starSpawner.SpawnStar(true);
             }
+
+            for (int i = 0; i < data.drawCircleCount; i++)
+            {
+                cosmeticUpgradesManager.MoreDraw(0);
+            }
+
             starSpawner.collectedStars = data.starCount;
             
         }
@@ -63,7 +75,8 @@ public class SaveGameScript : MonoBehaviour
         {
             upgrades = upgradeManager.upgrades,
             trailDuration = PencilConfig.trailDuration,
-            fieldOfView = upgradeManager.uiManager.MainCamera.fieldOfView
+            fieldOfView = upgradeManager.uiManager.MainCamera.fieldOfView,
+            timeSpeedDuration = uIScript.timeSpeedTimerMax
             
         };
         string json = JsonUtility.ToJson(data, true);
@@ -88,6 +101,7 @@ public class SaveGameScript : MonoBehaviour
             
             PencilConfig.trailDuration = data.trailDuration;
             upgradeManager.uiManager.MainCamera.fieldOfView = data.fieldOfView;
+            uIScript.timeSpeedTimerMax = data.timeSpeedDuration;
         }
     }
 
@@ -188,7 +202,7 @@ public class SaveGameScript : MonoBehaviour
 public class CosmeticUpgradeData
 {
     public int starCount;
-
+    public int drawCircleCount;
 }
 
 [Serializable]
@@ -197,6 +211,7 @@ public class UpgradeData
     public Upgrades[] upgrades;
     public float fieldOfView;
     public float trailDuration;
+    public float timeSpeedDuration;
 
 }
 [Serializable]
