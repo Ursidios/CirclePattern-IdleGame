@@ -12,10 +12,15 @@ public class CosmeticUpgradesManager : MonoBehaviour
     public List<PencilConfig> pencilConfig;
     public bool isShootingStar;
     public int drawCounter;
+
+    public GameObject shootingStarParticle;
+    private SaveGameScript saveGameScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerConfig = GetComponent<PlayerConfig>();
+        saveGameScript = FindObjectOfType<SaveGameScript>();
     }
 
     // Update is called once per frame
@@ -25,6 +30,8 @@ public class CosmeticUpgradesManager : MonoBehaviour
         {
             upgrade.textCost.text = upgrade.moneyCost.ToString("0");
         }
+
+        shootingStarParticle.SetActive(isShootingStar);
     }
 
     public void MoreDraw(int index)
@@ -50,19 +57,24 @@ public class CosmeticUpgradesManager : MonoBehaviour
     {
         if (!MoneyComparison(index))
             return;
-       isShootingStar = true;
-
+        
     }
 
     public bool MoneyComparison(int UpgradeIndex)
     {
         if (cosmeticUpgrades[UpgradeIndex].moneyCost <= playerConfig.moneySpecial)
         {
-            playerConfig.money -= cosmeticUpgrades[UpgradeIndex].moneyCost;
+            playerConfig.moneySpecial -= cosmeticUpgrades[UpgradeIndex].moneyCost;
             cosmeticUpgrades[UpgradeIndex].moneyCost += cosmeticUpgrades[UpgradeIndex].moneyCost * (cosmeticUpgrades[UpgradeIndex].inflationPercentageCost / 100f);
             cosmeticUpgrades[UpgradeIndex].level++;
-            
-            //saveGameScript.SaveAll();
+
+            if(UpgradeIndex == 1)
+            {
+                isShootingStar = true;
+                shootingStarParticle.SetActive(isShootingStar);
+            }
+
+            saveGameScript.SaveAll();
             return true;
         }
         return false;
