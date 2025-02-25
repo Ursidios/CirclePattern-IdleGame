@@ -34,9 +34,9 @@ public class CosmeticUpgradesManager : MonoBehaviour
         shootingStarParticle.SetActive(isShootingStar);
     }
 
-    public void MoreDraw(int index)
+    public void MoreDraw(bool isStarting)
     {
-        if (!MoneyComparison(index))
+        if (!MoneyComparison(0, isStarting))
             return;
 
 
@@ -53,18 +53,23 @@ public class CosmeticUpgradesManager : MonoBehaviour
         }
     }
 
-    public void ShootingStar(int index)
+    public void ShootingStar(bool isStarting)
     {
-        if (!MoneyComparison(index))
+        if (!MoneyComparison(1, false))
             return;
         
     }
 
-    public bool MoneyComparison(int UpgradeIndex)
+    public bool MoneyComparison(int UpgradeIndex, bool isStarting)
     {
-        if (cosmeticUpgrades[UpgradeIndex].moneyCost <= playerConfig.moneySpecial)
+        if (cosmeticUpgrades[UpgradeIndex].moneyCost <= playerConfig.moneySpecial || isStarting)
         {
-            playerConfig.moneySpecial -= cosmeticUpgrades[UpgradeIndex].moneyCost;
+            if(!isStarting)
+            {
+                playerConfig.moneySpecial -= cosmeticUpgrades[UpgradeIndex].moneyCost;
+            }
+
+            playerConfig.IncreaseSpecialMoneyMult(cosmeticUpgrades[UpgradeIndex].moneyPercentageIncrease);
             cosmeticUpgrades[UpgradeIndex].moneyCost += cosmeticUpgrades[UpgradeIndex].moneyCost * (cosmeticUpgrades[UpgradeIndex].inflationPercentageCost / 100f);
             cosmeticUpgrades[UpgradeIndex].level++;
 

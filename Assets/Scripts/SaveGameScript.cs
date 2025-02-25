@@ -43,7 +43,8 @@ public class SaveGameScript : MonoBehaviour
         {
             starCount = starSpawner.collectedStars,   
             drawCircleCount = cosmeticUpgradesManager.cosmeticUpgrades[0].level,
-            shootingStarActivate = cosmeticUpgradesManager.isShootingStar
+            shootingStarActivate = cosmeticUpgradesManager.isShootingStar,
+            cosmeticUpgrades = cosmeticUpgradesManager.cosmeticUpgrades
         };
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(cosmeticUpgradeSavePath, json);
@@ -56,7 +57,10 @@ public class SaveGameScript : MonoBehaviour
         {
             string json = File.ReadAllText(cosmeticUpgradeSavePath);
             CosmeticUpgradeData data = JsonUtility.FromJson<CosmeticUpgradeData>(json);
+
+            cosmeticUpgradesManager.cosmeticUpgrades[1].level = data.cosmeticUpgrades[1].level;
             
+
             for (int i = 0; i < data.starCount; i++)
             {
                 starSpawner.SpawnStar(true);
@@ -64,11 +68,14 @@ public class SaveGameScript : MonoBehaviour
 
             for (int i = 0; i < data.drawCircleCount; i++)
             {
-                cosmeticUpgradesManager.MoreDraw(0);
+                starSpawner.collectedStars = data.starCount;
+                cosmeticUpgradesManager.isShootingStar = data.shootingStarActivate;
+                cosmeticUpgradesManager.MoreDraw(true);
             }
-
-            starSpawner.collectedStars = data.starCount;
-            cosmeticUpgradesManager.isShootingStar = data.shootingStarActivate;
+            for (int i = 0; i < data.cosmeticUpgrades[1].level; i++)
+            {
+                cosmeticUpgradesManager.ShootingStar(true);
+            }
         }
     }
 
@@ -207,6 +214,7 @@ public class CosmeticUpgradeData
     public int starCount;
     public int drawCircleCount;
     public bool shootingStarActivate;
+    public CosmeticUpgrades[] cosmeticUpgrades;
 }
 
 [Serializable]

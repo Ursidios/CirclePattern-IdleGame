@@ -19,6 +19,11 @@ public class StarScript : MonoBehaviour
     public PlayerConfig playerConfig;
     private StarSpawner starSpawner;
     private SaveGameScript saveGameScript;
+    public AudioSource unstableSound;
+    public AudioSource collectSound;
+
+    private float vibrationInterval;
+    public float vibrationIntervalMax;
 
     void Start()
     {
@@ -48,6 +53,7 @@ public class StarScript : MonoBehaviour
         else
         {
             transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
+            unstableSound.Stop();
         }
     }
 
@@ -56,6 +62,14 @@ public class StarScript : MonoBehaviour
         Vector3 randomOffset = Random.insideUnitSphere * shakeIntensity;
         randomOffset.z = 0; // Manter a vibração apenas no plano X e Y
         transform.position = originalPosition + randomOffset; 
+        //unstableSound.Play();
+
+        vibrationInterval -= Time.deltaTime;
+        if(vibrationInterval <= 0)
+        {
+            Handheld.Vibrate();
+            vibrationInterval = vibrationIntervalMax;
+        }
     }
 
     void OnMouseDown()
@@ -66,6 +80,24 @@ public class StarScript : MonoBehaviour
             starSpawner.AddCollectedStar();
         }
         isStable = true;
+
+        unstableSound.Stop();
+
+        float randomPitch = Random.Range(0 ,100);
+        if(randomPitch < 33)
+        {
+            collectSound.pitch = 1.5f;                           
+        }
+        else if(randomPitch < 66)
+        {
+            collectSound.pitch = 2; 
+        }
+        else if(randomPitch <= 100)
+        {
+            collectSound.pitch = 3; 
+        }
+
+        collectSound.Play();
         saveGameScript.SaveAll();
     }
 }
