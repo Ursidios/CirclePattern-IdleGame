@@ -19,6 +19,7 @@ public class StarScript : MonoBehaviour
     public PlayerConfig playerConfig;
     private StarSpawner starSpawner;
     private SaveGameScript saveGameScript;
+    private VibrationManager vibrationManager;
     public AudioSource unstableSound;
     public AudioSource collectSound;
 
@@ -31,6 +32,7 @@ public class StarScript : MonoBehaviour
         playerConfig = FindAnyObjectByType<PlayerConfig>();
         starSpawner = FindAnyObjectByType<StarSpawner>();
         saveGameScript = FindAnyObjectByType<SaveGameScript>();
+        vibrationManager = FindAnyObjectByType<VibrationManager>();
     }
     void OnEnable()
     {
@@ -62,12 +64,20 @@ public class StarScript : MonoBehaviour
         Vector3 randomOffset = Random.insideUnitSphere * shakeIntensity;
         randomOffset.z = 0; // Manter a vibração apenas no plano X e Y
         transform.position = originalPosition + randomOffset; 
-        //unstableSound.Play();
+
 
         vibrationInterval -= Time.deltaTime;
         if(vibrationInterval <= 0)
         {
-            Handheld.Vibrate();
+            if(vibrationManager != null)
+            {
+                vibrationManager.StartVibration();
+            }
+            else
+            {       
+                unstableSound.Stop();
+            }
+            
             vibrationInterval = vibrationIntervalMax;
         }
     }

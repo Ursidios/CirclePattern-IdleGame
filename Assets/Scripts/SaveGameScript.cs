@@ -9,33 +9,45 @@ public class SaveGameScript : MonoBehaviour
     private string cosmeticUpgradeSavePath;
     private string upgradeSavePath;
     private string playerSavePath;
+    private string settingsSavePath;
     private PlayerConfig playerConfig;
     private UpgradeManager upgradeManager;
     private StarSpawner starSpawner;
     private CosmeticUpgradesManager cosmeticUpgradesManager;
     private UIScript uIScript;
+    private SettingsScript settingsScript;
+    private TutorialScript tutorialScript;
 
     void Start()
     {
         cosmeticUpgradeSavePath = Path.Combine(Application.persistentDataPath, "cosmeticUpgradeSavePath.json");
         upgradeSavePath = Path.Combine(Application.persistentDataPath, "upgradeData.json");
         playerSavePath = Path.Combine(Application.persistentDataPath, "playerData.json");
+        settingsSavePath = Path.Combine(Application.persistentDataPath, "settingsSavePath.json");
+        
         playerConfig = FindObjectOfType<PlayerConfig>();
         upgradeManager = FindObjectOfType<UpgradeManager>();
         starSpawner = FindObjectOfType<StarSpawner>();
         cosmeticUpgradesManager = FindObjectOfType<CosmeticUpgradesManager>();
         uIScript = FindObjectOfType<UIScript>();
+        settingsScript = FindObjectOfType<SettingsScript>();
+        tutorialScript = FindObjectOfType<TutorialScript>();
 
         LoadPlayer();
         LoadUpgrades();
         LoadCosmeticUpgrades();
-    }
 
+    }
+    void Awake()
+    {
+        LoadSettings();   
+    }
     public void SaveAll()
     {
         SaveCosmeticUpgrades();
         SaveUpgrades();
         SavePlayer();
+        SaveSettings();
     }
     public void SaveCosmeticUpgrades()
     {
@@ -126,7 +138,8 @@ public class SaveGameScript : MonoBehaviour
             circles = new List<CircleData>(),
             drawCircles = new List<CircleData>(),
             moneySpecial = playerConfig.moneySpecial,
-            moneySpecialMult = playerConfig.moneySpecialMult
+            moneySpecialMult = playerConfig.moneySpecialMult,
+            isFirstTime = tutorialScript.isFirstTime
         };
         
         foreach (var circle in playerConfig.circlesInGameList)
@@ -167,6 +180,7 @@ public class SaveGameScript : MonoBehaviour
             playerConfig.circleDrawAmount = data.circleDrawAmount;
             playerConfig.moneySpecial = data.moneySpecial;
             playerConfig.moneySpecialMult = data.moneySpecialMult;
+            tutorialScript.isFirstTime = data.isFirstTime;
             
             for (int i = 0; i < data.circles.Count; i++)
             {
@@ -192,7 +206,13 @@ public class SaveGameScript : MonoBehaviour
         }
         
     }
-
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if (!hasFocus) // Perdeu o foco, pode estar sendo fechado
+        {
+            SaveAll();
+        }
+    }
     public void DeleteSaveFiles()
     {
         if (File.Exists(upgradeSavePath))
@@ -205,6 +225,36 @@ public class SaveGameScript : MonoBehaviour
         {
             File.Delete(playerSavePath);
             Debug.Log("Player save file deleted.");
+        }
+    }
+
+    public void SaveSettings()
+    {
+        settingsScript.UpdateToggles();
+
+        SettingsData data = new SettingsData
+        {
+            toggleSettings = settingsScript.toggleSettings
+        };
+        
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(settingsSavePath, json);
+    }
+
+    public void LoadSettings()
+    {
+        if (File.Exists(settingsSavePath))
+        {
+            string json = File.ReadAllText(settingsSavePath);
+            SettingsData data = JsonUtility.FromJson<SettingsData>(json);
+            
+            for (int i = 0; i < settingsScript.toggleSettings.Length; i++)
+            {
+                print(settingsScript.toggleSettings[i].toggle.isOn);
+                settingsScript.toggleSettings[i].toggle.isOn = data.toggleSettings[i].isOn;
+            }
+            
+
         }
     }
 }
@@ -237,6 +287,7 @@ public class PlayerData
     public List<CircleData> drawCircles;
     public float moneySpecial;
     public float moneySpecialMult;
+    public bool isFirstTime;
 }
 
 [Serializable]
@@ -249,3 +300,8 @@ public class CircleData
     public float scaleZ;
 }
 
+[Serializable]
+public class SettingsData
+{
+    public ToggleSettings[] toggleSettings;
+}

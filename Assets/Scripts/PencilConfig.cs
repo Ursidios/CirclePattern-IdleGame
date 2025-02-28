@@ -14,7 +14,10 @@ public class PencilConfig : MonoBehaviour
         trailRenderer = gameObject.GetComponent<TrailRenderer>();
         pencilCircle = gameObject.GetComponent<SpriteRenderer>();
 
-        trailDuration = 0.5f;
+        if(trailDuration == 0)
+        {
+            trailDuration = 0.5f;
+        }
 
         if(isMainDraw)
         {

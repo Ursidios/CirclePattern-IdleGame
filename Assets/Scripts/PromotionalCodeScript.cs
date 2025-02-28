@@ -23,6 +23,7 @@ public class PromotionalCodeScript : MonoBehaviour
         if(promotionalText.text == "Giovanna")
         {
             promotionalCodeEvent[0]?.Invoke();
+            promotionalText.text = "";
         }
     }
 }
