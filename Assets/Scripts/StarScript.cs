@@ -26,6 +26,9 @@ public class StarScript : MonoBehaviour
     private float vibrationInterval;
     public float vibrationIntervalMax;
 
+    public GameObject starParticle;
+    private GameObject newStarParticle;
+
     void Start()
     {
         originalPosition = transform.position;
@@ -45,6 +48,10 @@ public class StarScript : MonoBehaviour
         childrenStar1.GetComponent<TrailRenderer>().startColor = randomStarColors1;
         childrenStar2.GetComponent<TrailRenderer>().startColor = randomStarColors2;
 
+        if (!isStable)
+        {
+            newStarParticle = Instantiate(starParticle, gameObject.transform.position, gameObject.transform.rotation);
+        }
     }
     void Update()
     {
@@ -56,6 +63,11 @@ public class StarScript : MonoBehaviour
         {
             transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
             unstableSound.Stop();
+
+            if(newStarParticle != null)
+            {
+                Destroy(newStarParticle);
+            }
         }
     }
 
@@ -86,11 +98,12 @@ public class StarScript : MonoBehaviour
     {
         if(!isStable)
         {
-            playerConfig.moneySpecialMult += 0.2f;
+            playerConfig.moneySpecialMult += 0.02f;
             starSpawner.AddCollectedStar();
         }
+        
         isStable = true;
-
+    
         unstableSound.Stop();
 
         float randomPitch = Random.Range(0 ,100);
@@ -106,7 +119,7 @@ public class StarScript : MonoBehaviour
         {
             collectSound.pitch = 3; 
         }
-
+        
         collectSound.Play();
         saveGameScript.SaveAll();
     }

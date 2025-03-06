@@ -62,6 +62,7 @@ MonoBehaviour:
   unstableSound: {fileID: 6357018592947010997}
   collectSound: {fileID: 4867946185064160257}
   vibrationIntervalMax: 0.5
+  starParticle: {fileID: 2710804093112747025, guid: b596de828bce05444861580e9807bebd, type: 3}
 --- !u!61 &5734745114983646971
 BoxCollider2D:
   m_ObjectHideFlags: 0
