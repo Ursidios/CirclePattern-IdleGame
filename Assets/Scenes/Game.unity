@@ -17810,7 +17810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   money: 0
-  moneyMult: 1
+  moneyMult: 0.5
   moneySpecial: 0
   moneySpecialMult: 0
   circleAmount: 0
@@ -17864,40 +17864,40 @@ MonoBehaviour:
     level: 0
     maxLevel: 5
     textCost: {fileID: 1679115355}
-    moneyPercentageIncrease: 0
+    moneyPercentageIncrease: 300
     inflationPercentageCost: 50
     buttons: {fileID: 1743894521}
   - name: Rotation Speed
-    moneyCost: 15
+    moneyCost: 10
     level: 0
     maxLevel: 5
     textCost: {fileID: 1821736576}
-    moneyPercentageIncrease: 8
-    inflationPercentageCost: 10
+    moneyPercentageIncrease: 1
+    inflationPercentageCost: 200
     buttons: {fileID: 2113868835}
   - name: Duration
     moneyCost: 30
     level: 0
     maxLevel: 5
     textCost: {fileID: 989445202}
-    moneyPercentageIncrease: 15
-    inflationPercentageCost: 15
+    moneyPercentageIncrease: 5
+    inflationPercentageCost: 90
     buttons: {fileID: 528515187}
   - name: More Circle
-    moneyCost: 200
+    moneyCost: 2000
     level: 0
     maxLevel: 5
     textCost: {fileID: 1562684895}
-    moneyPercentageIncrease: 50
-    inflationPercentageCost: 100
+    moneyPercentageIncrease: 7
+    inflationPercentageCost: 200
     buttons: {fileID: 1224876742}
   - name: Circle Size
-    moneyCost: 50
+    moneyCost: 250
     level: 0
     maxLevel: 5
     textCost: {fileID: 191921948}
-    moneyPercentageIncrease: 20
-    inflationPercentageCost: 30
+    moneyPercentageIncrease: 10
+    inflationPercentageCost: 20
     buttons: {fileID: 893759698}
   saveGameScript: {fileID: 1311163131}
 --- !u!114 &614964599
@@ -17914,7 +17914,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cosmeticUpgrades:
   - name: More Draw
-    moneyCost: 30
+    moneyCost: 200
     level: 0
     maxLevel: 0
     textCost: {fileID: 1740822552}
@@ -17922,11 +17922,11 @@ MonoBehaviour:
     inflationPercentageCost: 200
     buttons: {fileID: 1142589367}
   - name: Shooting Star
-    moneyCost: 200
+    moneyCost: 500
     level: 0
     maxLevel: 0
     textCost: {fileID: 257270327}
-    moneyPercentageIncrease: 1
+    moneyPercentageIncrease: 2
     inflationPercentageCost: 200
     buttons: {fileID: 1775029959}
   pencilConfig: []

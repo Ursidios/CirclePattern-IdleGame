@@ -18,6 +18,8 @@ public class UiManager : MonoBehaviour
     public SaveGameScript saveGameScript;
 
 
+    private bool pinchDetected = false; // Controle para evitar chamadas repetidas
+
     public void EnableShopUI()
     {
         shopUI.SetActive(true);
@@ -80,7 +82,34 @@ public class UiManager : MonoBehaviour
         {
             targetFOV = 165.1006f;
         }
-    
+
+        if (Input.touchCount == 2) // Detecta dois toques na tela
+        {
+            Touch touch1 = Input.GetTouch(0);
+            Touch touch2 = Input.GetTouch(1);
+
+            // Calcula a distância entre os dois toques na frame atual e na anterior
+            float prevDistance = (touch1.position - touch1.deltaPosition - (touch2.position - touch2.deltaPosition)).magnitude;
+            float currentDistance = (touch1.position - touch2.position).magnitude;
+
+            if (!pinchDetected)
+            {
+                if (currentDistance > prevDistance) // Pinça se afastando (zoom in)
+                {
+                    ZoomInButton();
+                    pinchDetected = true;
+                }
+                else if (currentDistance < prevDistance) // Pinça se aproximando (zoom out)
+                {
+                    ZoomOutButton();
+                    pinchDetected = true;
+                }
+            }
+        }
+        else
+        {
+            pinchDetected = false; // Reseta quando os dedos são levantados
+        }
     }
 
     public void ZoomInButton()

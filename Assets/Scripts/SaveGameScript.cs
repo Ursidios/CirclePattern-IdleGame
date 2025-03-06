@@ -117,8 +117,6 @@ public class SaveGameScript : MonoBehaviour
                 upgradeManager.upgrades[i].moneyCost = data.upgrades[i].moneyCost;
                 upgradeManager.upgrades[i].level = data.upgrades[i].level;
                 upgradeManager.upgrades[i].maxLevel = data.upgrades[i].maxLevel;
-                upgradeManager.upgrades[i].moneyPercentageIncrease = data.upgrades[i].moneyPercentageIncrease;
-                upgradeManager.upgrades[i].inflationPercentageCost = data.upgrades[i].inflationPercentageCost;
             }
             
             PencilConfig.trailDuration = data.trailDuration;
