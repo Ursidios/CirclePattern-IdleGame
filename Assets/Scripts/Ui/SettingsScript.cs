@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class SettingsScript : MonoBehaviour
 {
-    public ToggleSettings[] toggleSettings;
+    //public bool[] toggleBool;
+    public Toggle[] toggleComponents;
+    public GameObject[] toggleAssociatedGameObject;
 
     public SaveGameScript saveGameScript;
     public void DeleteAllProgress()
@@ -22,30 +24,19 @@ public class SettingsScript : MonoBehaviour
     }
     void Update()
     {
-
-    }
-
-    public void UpdateObj()
-    {
-        foreach (var item in toggleSettings)
+        for (int i = 0; i < toggleComponents.Length; i++)
         {
-            item.associatedGameObject.SetActive(item.toggle.isOn);
+            toggleAssociatedGameObject[i].SetActive(toggleComponents[i].isOn);
         }
     }
 
-    public void UpdateToggles()
+    public void UpdateObj(bool[] toggleBools)
     {
-        foreach (var item in toggleSettings)
+
+        for (int i = 0; i < toggleComponents.Length; i++)
         {
-            item.isOn = item.toggle.isOn;
+            toggleComponents[i].isOn = toggleBools[i];
         }
+
     }
-}
-[Serializable]
-public class ToggleSettings
-{
-    public string name;
-    public Toggle toggle;
-    public bool isOn;
-    public GameObject associatedGameObject;
 }

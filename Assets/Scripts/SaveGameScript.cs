@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class SaveGameScript : MonoBehaviour
@@ -36,11 +37,11 @@ public class SaveGameScript : MonoBehaviour
         LoadPlayer();
         LoadUpgrades();
         LoadCosmeticUpgrades();
-
+        LoadSettings(); 
     }
     void Awake()
     {
-        LoadSettings();   
+          
     }
     public void SaveAll()
     {
@@ -116,7 +117,6 @@ public class SaveGameScript : MonoBehaviour
             {
                 upgradeManager.upgrades[i].moneyCost = data.upgrades[i].moneyCost;
                 upgradeManager.upgrades[i].level = data.upgrades[i].level;
-                upgradeManager.upgrades[i].maxLevel = data.upgrades[i].maxLevel;
             }
             
             PencilConfig.trailDuration = data.trailDuration;
@@ -228,13 +228,21 @@ public class SaveGameScript : MonoBehaviour
 
     public void SaveSettings()
     {
-        settingsScript.UpdateToggles();
+        bool[] newBoolArray = new bool[settingsScript.toggleComponents.Length];
+
+        for (int i = 0; i < settingsScript.toggleComponents.Length; i++)
+        {
+            newBoolArray[i] = settingsScript.toggleComponents[i].isOn;
+        }
 
         SettingsData data = new SettingsData
         {
-            toggleSettings = settingsScript.toggleSettings
+            toggleSettings = newBoolArray
+
+
         };
-        
+
+
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(settingsSavePath, json);
     }
@@ -245,14 +253,14 @@ public class SaveGameScript : MonoBehaviour
         {
             string json = File.ReadAllText(settingsSavePath);
             SettingsData data = JsonUtility.FromJson<SettingsData>(json);
-            
-            for (int i = 0; i < settingsScript.toggleSettings.Length; i++)
-            {
-                print(settingsScript.toggleSettings[i].toggle.isOn);
-                settingsScript.toggleSettings[i].toggle.isOn = data.toggleSettings[i].isOn;
-            }
+
+            // bool[] newBoolArray = new bool[data.toggleSettings.Length];
+
+
+            //     newBoolArray = data.toggleSettings;
             
 
+            settingsScript.UpdateObj(data.toggleSettings);
         }
     }
 }
@@ -301,5 +309,5 @@ public class CircleData
 [Serializable]
 public class SettingsData
 {
-    public ToggleSettings[] toggleSettings;
+    public bool[] toggleSettings;
 }

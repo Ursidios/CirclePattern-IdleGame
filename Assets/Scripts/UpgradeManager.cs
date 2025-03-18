@@ -12,6 +12,10 @@ public class UpgradeManager : MonoBehaviour
     private string savePath;
     public SaveGameScript saveGameScript;
 
+    public AudioSource buySoundSource;
+
+    public GameObject moneyLossParent;
+    public GameObject moneyLossTextObj;
     void Start()
     {
         playerConfig = GetComponent<PlayerConfig>();
@@ -23,6 +27,20 @@ public class UpgradeManager : MonoBehaviour
         foreach (var upgrade in upgrades)
         {
             upgrade.textCost.text = upgrade.moneyCost.ToString("$0.0");
+
+            if(upgrade.level >= upgrade.maxLevel)
+            {
+                upgrade.buttons.SetActive(false);
+            }
+
+            if(upgrade.moneyCost > playerConfig.money)
+            {
+                upgrade.buttons.GetComponent<CanvasGroup>().alpha = 0.4f;
+            }
+            else
+            {
+                upgrade.buttons.GetComponent<CanvasGroup>().alpha = 1;
+            }
         }
     }
 
@@ -87,15 +105,30 @@ public class UpgradeManager : MonoBehaviour
 
     public bool MoneyComparison(int UpgradeIndex)
     {
-        if (upgrades[UpgradeIndex].moneyCost <= playerConfig.money)
+        if(upgrades[UpgradeIndex].level >= upgrades[UpgradeIndex].maxLevel)
         {
-            playerConfig.money -= upgrades[UpgradeIndex].moneyCost;
-            upgrades[UpgradeIndex].moneyCost += upgrades[UpgradeIndex].moneyCost * (upgrades[UpgradeIndex].inflationPercentageCost / 100f);
-            upgrades[UpgradeIndex].level++;
-
-            saveGameScript.SaveAll();
-            return true;
+            return false;
         }
+        else
+        {
+            if (upgrades[UpgradeIndex].moneyCost <= playerConfig.money)
+            {
+                playerConfig.money -= upgrades[UpgradeIndex].moneyCost;
+
+                GameObject newMoneyLossObj = Instantiate(moneyLossTextObj, moneyLossParent.transform);
+                newMoneyLossObj.GetComponent<TMP_Text>().text = upgrades[UpgradeIndex].moneyCost.ToString("-00");
+
+                upgrades[UpgradeIndex].moneyCost += upgrades[UpgradeIndex].moneyCost * (upgrades[UpgradeIndex].inflationPercentageCost / 100f);
+                upgrades[UpgradeIndex].level++;
+
+                buySoundSource.Play();
+
+
+                
+                return true;
+            }
+        }
+
         return false;
     }
 }

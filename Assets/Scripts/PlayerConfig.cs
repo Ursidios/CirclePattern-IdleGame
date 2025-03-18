@@ -40,12 +40,11 @@ public class PlayerConfig : MonoBehaviour
     public void IncreaseMoneyMult(float amount)
     {
         moneyMult += moneyMult * (amount / 100f);
-        saveGameScript.SaveAll();
     }
     public void IncreaseSpecialMoneyMult(float amount)
     {
         moneySpecialMult += moneySpecialMult * (amount / 100f);
-        saveGameScript.SaveAll();
+
     }
 
     public void MoneyRules(float mult)

@@ -20,7 +20,7 @@ public class PromotionalCodeScript : MonoBehaviour
 
     public void ConfirmPromotionalCode()
     {
-        if(promotionalText.text == "Giovanna")
+        if(promotionalText.text == "T.A.M.M")
         {
             promotionalCodeEvent[0]?.Invoke();
             promotionalText.text = "";

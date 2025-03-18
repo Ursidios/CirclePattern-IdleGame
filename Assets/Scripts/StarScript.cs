@@ -121,6 +121,6 @@ public class StarScript : MonoBehaviour
         }
         
         collectSound.Play();
-        saveGameScript.SaveAll();
+        //saveGameScript.SaveAll();
     }
 }

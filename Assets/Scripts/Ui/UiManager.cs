@@ -17,7 +17,7 @@ public class UiManager : MonoBehaviour
     public PlayerConfig playerConfig;
     public SaveGameScript saveGameScript;
 
-
+    public bool isStart;
     private bool pinchDetected = false; // Controle para evitar chamadas repetidas
 
     public void EnableShopUI()
@@ -68,19 +68,31 @@ public class UiManager : MonoBehaviour
         if (MainCamera == null)
             MainCamera = Camera.main;
         targetFOV = MainCamera.fieldOfView;
+        MainCamera.fieldOfView = 171;
     }
 
     void Update()
     {
-        MainCamera.fieldOfView = Mathf.Lerp(MainCamera.fieldOfView, targetFOV, Time.deltaTime * zoomSpeed);
+        if(isStart)
+        {
+            MainCamera.fieldOfView = Mathf.Lerp(MainCamera.fieldOfView, targetFOV, Time.deltaTime * 2);
+            if(targetFOV >= MainCamera.fieldOfView)
+            {
+                isStart = false;
+            }
+        }
+        else
+        {
+            MainCamera.fieldOfView = Mathf.Lerp(MainCamera.fieldOfView, targetFOV, Time.deltaTime * zoomSpeed);
+        }
 
         if(targetFOV < 39.1003f)
         {
             targetFOV = 39.1003f;
         }
-        if(targetFOV > 165.1006f)
+        if(targetFOV > 171)
         {
-            targetFOV = 165.1006f;
+            targetFOV = 171;
         }
 
         if (Input.touchCount == 2) // Detecta dois toques na tela
@@ -117,8 +129,7 @@ public class UiManager : MonoBehaviour
         targetFOV -= zoomAmount;
 
         saveGameScript.SaveAll();
-        //playerConfig.SavePlayerPrefs();
-        //upgradeManager.SavePlayerData();
+        isStart = false;
     }
 
     public void ZoomOutButton()
@@ -126,8 +137,6 @@ public class UiManager : MonoBehaviour
         targetFOV += zoomAmount;
 
         saveGameScript.SaveAll();
-
-        //playerConfig.SavePlayerPrefs();
-        //upgradeManager.SavePlayerData();
+        isStart = false;
     }
 }

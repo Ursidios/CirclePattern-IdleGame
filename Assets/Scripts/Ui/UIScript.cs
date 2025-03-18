@@ -8,6 +8,8 @@ public class UIScript : MonoBehaviour
     public TMP_Text moneyText;   
     public TMP_Text specialMoneyText;   
     public GameObject timeSpeedButton;   
+    public GameObject timeSpeedInverted;   
+    public TMP_Text timeSpeedText;   
 
     public UpgradeManager upgradeManager;
 
@@ -25,7 +27,7 @@ public class UIScript : MonoBehaviour
         upgradeManager.upgrades[4].buttons.SetActive(!upgradeManager.upgrades[3].buttons.activeSelf);
 
 
-        if(upgradeManager.upgrades[4].level >= upgradeManager.upgrades[4].maxLevel)
+        if(upgradeManager.upgrades[4].level >= 5)
         {
             upgradeManager.upgrades[3].buttons.SetActive(true);
         }
@@ -38,7 +40,7 @@ public class UIScript : MonoBehaviour
 
         TimeSpeed();
 
-        if(blockTimeSpeed)
+        if(blockTimeSpeed && !timeSpeedOn)
         {
             blockTimeSpeedTimer -= Time.deltaTime;
         }
@@ -56,6 +58,9 @@ public class UIScript : MonoBehaviour
         {
             timeSpeedButton.SetActive(false);
         }
+
+        timeSpeedInverted.SetActive(blockTimeSpeed);
+        timeSpeedText.text = blockTimeSpeedTimer.ToString("00");
     }
 
     public void EnableTimeSpeedButton()

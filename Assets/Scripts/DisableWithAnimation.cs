@@ -7,4 +7,10 @@ public class DisableWithAnimation : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+
+    public void DestroyObject()
+    {
+        Destroy(gameObject);
+    }
 }

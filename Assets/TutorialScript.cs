@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TutorialScript : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class TutorialScript : MonoBehaviour
     public bool isFirstTime;
     public bool isInStarTutorial;
 
-
+    public UnityEvent onFindStar;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,7 +23,7 @@ public class TutorialScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(tutorialLevel == instructionBoxes.Length)
+        if(tutorialLevel == instructionBoxes.Length + 1)
         {
             isFirstTime = false;
         }
@@ -39,7 +40,7 @@ public class TutorialScript : MonoBehaviour
             else
             {
                 UpdateTutorialLevel(6);
-                print("ACHOOOOOOOOOOOOOOOOOOOOOOOO");
+                onFindStar?.Invoke();
             }
         }
 

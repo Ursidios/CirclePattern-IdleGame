@@ -15,12 +15,16 @@ public class CosmeticUpgradesManager : MonoBehaviour
 
     public GameObject shootingStarParticle;
     private SaveGameScript saveGameScript;
+    private UpgradeManager upgradeManager;
+    public bool canBuyDraw;
+    public GameObject popUpBlockDrawUpgrade;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerConfig = GetComponent<PlayerConfig>();
         saveGameScript = FindObjectOfType<SaveGameScript>();
+        upgradeManager = GetComponent<UpgradeManager>();
     }
 
     // Update is called once per frame
@@ -32,24 +36,40 @@ public class CosmeticUpgradesManager : MonoBehaviour
         }
 
         shootingStarParticle.SetActive(isShootingStar);
+
+        if(cosmeticUpgrades[0].level < upgradeManager.upgrades[3].level)
+        {
+            canBuyDraw = true;
+        }
+        else
+        {
+            canBuyDraw = false;
+        }
     }
 
     public void MoreDraw(bool isStarting)
     {
-        if (!MoneyComparison(0, isStarting))
-            return;
-
-
-        pencilConfig.Clear();
-        foreach (var item in FindObjectsOfType<PencilConfig>())
+        if(!canBuyDraw && !isStarting)
         {
-            pencilConfig.Add(item);
+            popUpBlockDrawUpgrade.SetActive(true);
         }
-        pencilConfig.Reverse();
-        for (int i = 0; i < cosmeticUpgrades[0].level + 1; i++)
+        else
         {
-            pencilConfig[i].enabled = true;
+            if (!MoneyComparison(0, isStarting))
+                return;
 
+
+            pencilConfig.Clear();
+            foreach (var item in FindObjectsOfType<PencilConfig>())
+            {
+                pencilConfig.Add(item);
+            }
+            pencilConfig.Reverse();
+            for (int i = 0; i < cosmeticUpgrades[0].level + 1; i++)
+            {
+                pencilConfig[i].enabled = true;
+
+            }
         }
     }
 
@@ -79,7 +99,7 @@ public class CosmeticUpgradesManager : MonoBehaviour
                 shootingStarParticle.SetActive(isShootingStar);
             }
 
-            saveGameScript.SaveAll();
+
             return true;
         }
         return false;
