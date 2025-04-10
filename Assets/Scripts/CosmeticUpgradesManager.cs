@@ -33,6 +33,20 @@ public class CosmeticUpgradesManager : MonoBehaviour
         foreach (var upgrade in cosmeticUpgrades)
         {
             upgrade.textCost.text = upgrade.moneyCost.ToString("0");
+            
+            if(upgrade.level >= upgrade.maxLevel)
+            {
+                upgrade.buttons.SetActive(false);
+            }
+
+            if(upgrade.moneyCost > playerConfig.moneySpecial)
+            {
+                upgrade.buttons.GetComponent<CanvasGroup>().alpha = 0.4f;
+            }
+            else
+            {
+                upgrade.buttons.GetComponent<CanvasGroup>().alpha = 1;
+            }
         }
 
         shootingStarParticle.SetActive(isShootingStar);
@@ -49,28 +63,28 @@ public class CosmeticUpgradesManager : MonoBehaviour
 
     public void MoreDraw(bool isStarting)
     {
-        if(!canBuyDraw && !isStarting)
-        {
-            popUpBlockDrawUpgrade.SetActive(true);
-        }
-        else
-        {
-            if (!MoneyComparison(0, isStarting))
-                return;
-
-
-            pencilConfig.Clear();
-            foreach (var item in FindObjectsOfType<PencilConfig>())
+            if(!canBuyDraw && !isStarting)
             {
-                pencilConfig.Add(item);
+                popUpBlockDrawUpgrade.SetActive(true);
             }
-            pencilConfig.Reverse();
-            for (int i = 0; i < cosmeticUpgrades[0].level + 1; i++)
+            else
             {
-                pencilConfig[i].enabled = true;
+                if (!MoneyComparison(0, isStarting))
+                    return;
 
+
+                pencilConfig.Clear();
+                foreach (var item in FindObjectsOfType<PencilConfig>())
+                {
+                    pencilConfig.Add(item);
+                }
+                pencilConfig.Reverse();
+                for (int i = 0; i < cosmeticUpgrades[0].level + 1; i++)
+                {
+                    pencilConfig[i].enabled = true;
+
+                }
             }
-        }
     }
 
     public void ShootingStar(bool isStarting)
@@ -82,25 +96,33 @@ public class CosmeticUpgradesManager : MonoBehaviour
 
     public bool MoneyComparison(int UpgradeIndex, bool isStarting)
     {
-        if (cosmeticUpgrades[UpgradeIndex].moneyCost <= playerConfig.moneySpecial || isStarting)
+
+        if(cosmeticUpgrades[UpgradeIndex].level >= cosmeticUpgrades[UpgradeIndex].maxLevel)
         {
-            if(!isStarting)
+            return false;
+        }
+        else
+        {
+            if (cosmeticUpgrades[UpgradeIndex].moneyCost <= playerConfig.moneySpecial || isStarting)
             {
-                playerConfig.moneySpecial -= cosmeticUpgrades[UpgradeIndex].moneyCost;
+                if(!isStarting)
+                {
+                    playerConfig.moneySpecial -= cosmeticUpgrades[UpgradeIndex].moneyCost;
+                }
+
+                playerConfig.IncreaseSpecialMoneyMult(cosmeticUpgrades[UpgradeIndex].moneyPercentageIncrease);
+                cosmeticUpgrades[UpgradeIndex].moneyCost += cosmeticUpgrades[UpgradeIndex].moneyCost * (cosmeticUpgrades[UpgradeIndex].inflationPercentageCost / 100f);
+                cosmeticUpgrades[UpgradeIndex].level++;
+
+                if(UpgradeIndex == 1)
+                {
+                    isShootingStar = true;
+                    shootingStarParticle.SetActive(isShootingStar);
+                }
+
+
+                return true;
             }
-
-            playerConfig.IncreaseSpecialMoneyMult(cosmeticUpgrades[UpgradeIndex].moneyPercentageIncrease);
-            cosmeticUpgrades[UpgradeIndex].moneyCost += cosmeticUpgrades[UpgradeIndex].moneyCost * (cosmeticUpgrades[UpgradeIndex].inflationPercentageCost / 100f);
-            cosmeticUpgrades[UpgradeIndex].level++;
-
-            if(UpgradeIndex == 1)
-            {
-                isShootingStar = true;
-                shootingStarParticle.SetActive(isShootingStar);
-            }
-
-
-            return true;
         }
         return false;
     }

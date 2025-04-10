@@ -87,21 +87,25 @@ public class UpgradeManager : MonoBehaviour
         if (!MoneyComparison(3))
             return;
 
-        playerConfig.SpawnCircle(new Vector3(1, 1, 1));
+
+    
+        Transform circleTransform = new GameObject("NewCircle").transform;
+
+        playerConfig.SpawnCircle(new Vector3(1, 1, 1), circleTransform.position, circleTransform.rotation);
         playerConfig.IncreaseMoneyMult(upgrades[3].moneyPercentageIncrease);
         upgrades[4].level = 0;
         uiManager.ZoomOutButton();
         uiManager.ZoomOutButton();
     }
 
-    public void IncreaseDrawCicles()
-    {
-        if (!MoneyComparison(5))
-            return;
+    // public void IncreaseDrawCicles()
+    // {
+    //     if (!MoneyComparison(5))
+    //         return;
 
-        playerConfig.SpawnDrawCircle();
-        playerConfig.IncreaseMoneyMult(upgrades[5].moneyPercentageIncrease);
-    }
+    //     //playerConfig.SpawnDrawCircle();
+    //     playerConfig.IncreaseMoneyMult(upgrades[5].moneyPercentageIncrease);
+    // }
 
     public bool MoneyComparison(int UpgradeIndex)
     {

@@ -8,11 +8,18 @@ public class CircleDrawScript : MonoBehaviour
     public float speed = 1f;
     public float RotationSpeedMulti;
     public Vector3 center = Vector3.zero;
-    private float angle = 0f;  
+    public float angle = 0f;  
     
     void Start()
     {
+        if (baseCircle != null)
+        {
+            center = baseCircle.transform.position;
+            baseCircleRadius = baseCircle.transform.localScale.x / 2 - gameObject.transform.localScale.x / 2;
 
+            Vector3 offset = transform.position - center;
+            angle = Mathf.Atan2(offset.y, offset.x); // ângulo inicial com base na posição
+        }
     }
     void FixedUpdate()
     {
@@ -20,6 +27,7 @@ public class CircleDrawScript : MonoBehaviour
         {
             center = baseCircle.transform.position;
             baseCircleRadius = baseCircle.transform.localScale.x / 2 - gameObject.transform.localScale.x / 2;
+        
         }
         else
         {

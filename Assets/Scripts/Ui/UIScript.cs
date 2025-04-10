@@ -24,17 +24,25 @@ public class UIScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        upgradeManager.upgrades[4].buttons.SetActive(!upgradeManager.upgrades[3].buttons.activeSelf);
 
+        if(upgradeManager.upgrades[4].level < upgradeManager.upgrades[4].maxLevel)
+        {
+            upgradeManager.upgrades[4].buttons.SetActive(!upgradeManager.upgrades[3].buttons.activeSelf);
+        }
 
-        if(upgradeManager.upgrades[4].level >= 5)
+        if(upgradeManager.upgrades[3].level < upgradeManager.upgrades[3].maxLevel)
         {
-            upgradeManager.upgrades[3].buttons.SetActive(true);
+            if(upgradeManager.upgrades[4].level >= 5)
+            {
+
+                upgradeManager.upgrades[3].buttons.SetActive(true);
+            }
+            else
+            {
+                upgradeManager.upgrades[3].buttons.SetActive(false);
+            }
         }
-        else
-        {
-            upgradeManager.upgrades[3].buttons.SetActive(false);
-        }
+
         moneyText.text = playerConfig.money.ToString("0");
         specialMoneyText.text = playerConfig.moneySpecial.ToString("0");
 

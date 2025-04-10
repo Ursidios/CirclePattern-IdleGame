@@ -127,6 +127,15 @@ public class SaveGameScript : MonoBehaviour
 
     public void SavePlayer()
     {
+        List<Vector3> newCirclePositionList = new List<Vector3>();
+        List<Quaternion> newCircleRotationList = new List<Quaternion>();
+
+        foreach (var item in playerConfig.circlesInGameList)
+        {
+            newCirclePositionList.Add(item.transform.position);
+            newCircleRotationList.Add(item.transform.rotation);
+        }
+
         PlayerData data = new PlayerData
         {
             money = playerConfig.money,
@@ -137,7 +146,9 @@ public class SaveGameScript : MonoBehaviour
             drawCircles = new List<CircleData>(),
             moneySpecial = playerConfig.moneySpecial,
             moneySpecialMult = playerConfig.moneySpecialMult,
-            isFirstTime = tutorialScript.isFirstTime
+            isFirstTime = tutorialScript.isFirstTime,
+            circlePositions = newCirclePositionList,
+            circleRotations = newCircleRotationList
         };
         
         foreach (var circle in playerConfig.circlesInGameList)
@@ -185,22 +196,24 @@ public class SaveGameScript : MonoBehaviour
                 Vector3 scale = new Vector3(data.circles[i].scaleX, data.circles[i].scaleY, data.circles[i].scaleZ);
                 if (i != 0)
                 {
-                    playerConfig.SpawnCircle(scale);
+                    playerConfig.SpawnCircle(scale, data.circlePositions[i], data.circleRotations[i]);
                 }
                 playerConfig.circlesInGameList[i].transform.localScale = scale;
                 playerConfig.circlesInGameList[i].GetComponent<CircleDrawScript>().speed = data.circles[i].speed;
                 playerConfig.circlesInGameList[i].GetComponent<CircleDrawScript>().RotationSpeedMulti = data.circles[i].rotationSpeed;
+                playerConfig.circlesInGameList[i].gameObject.transform.position = data.circlePositions[i];
+                playerConfig.circlesInGameList[i].gameObject.transform.rotation = data.circleRotations[i];
             }
             
-            for (int i = 0; i < data.drawCircles.Count; i++)
-            {
-                if (i != 0)
-                {
-                    playerConfig.SpawnDrawCircle();
-                }
-                playerConfig.drawCirclesInGameList[i].GetComponent<CircleDrawScript>().speed = data.drawCircles[i].speed;
-                playerConfig.drawCirclesInGameList[i].GetComponent<CircleDrawScript>().RotationSpeedMulti = data.drawCircles[i].rotationSpeed;
-            }
+            // for (int i = 0; i < data.drawCircles.Count; i++)
+            // {
+            //     if (i != 0)
+            //     {
+            //         playerConfig.SpawnDrawCircle();
+            //     }
+            //     playerConfig.drawCirclesInGameList[i].GetComponent<CircleDrawScript>().speed = data.drawCircles[i].speed;
+            //     playerConfig.drawCirclesInGameList[i].GetComponent<CircleDrawScript>().RotationSpeedMulti = data.drawCircles[i].rotationSpeed;
+            // }
         }
         
     }
@@ -291,6 +304,8 @@ public class PlayerData
     public int circleDrawAmount;
     public List<CircleData> circles;
     public List<CircleData> drawCircles;
+    public List<Vector3> circlePositions;
+    public List<Quaternion> circleRotations;
     public float moneySpecial;
     public float moneySpecialMult;
     public bool isFirstTime;

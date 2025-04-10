@@ -56,7 +56,7 @@ public class PlayerConfig : MonoBehaviour
         moneySpecial += Time.deltaTime * mult;
     }
 
-    public void SpawnCircle(Vector3 circleScale)
+    public void SpawnCircle(Vector3 circleScale, Vector3 circlePosition, Quaternion circleRotation)
     {
         GameObject newCircle = Instantiate(circlePrefab, Vector3.zero, Quaternion.identity);
 
@@ -78,6 +78,8 @@ public class PlayerConfig : MonoBehaviour
         
         newCircle.GetComponent<CircleDrawScript>().speed = 1;
         newCircle.GetComponent<CircleDrawScript>().RotationSpeedMulti = 1;
+        newCircle.transform.position = circlePosition;
+        newCircle.transform.rotation = circleRotation;
         
         circlesInGameList.Add(newCircle);
         circleAmount = circlesInGameList.Count;
@@ -85,14 +87,14 @@ public class PlayerConfig : MonoBehaviour
         colorSelector = (colorSelector + 1) % circleColors.Length;
     }
 
-    public void SpawnDrawCircle()
-    {
-        GameObject newCircle = Instantiate(circleDrawPrefab, Vector3.zero, Quaternion.identity);
-        newCircle.GetComponent<CircleDrawScript>().speed = 1;
-        newCircle.GetComponent<CircleDrawScript>().RotationSpeedMulti = 1;
+    // public void SpawnDrawCircle()
+    // {
+    //     GameObject newCircle = Instantiate(circleDrawPrefab, Vector3.zero, Quaternion.identity);
+    //     newCircle.GetComponent<CircleDrawScript>().speed = 1;
+    //     newCircle.GetComponent<CircleDrawScript>().RotationSpeedMulti = 1;
 
-        circleDrawAmount = drawCirclesInGameList.Count;
-        drawCirclesInGameList.Add(newCircle);
-    }
+    //     circleDrawAmount = drawCirclesInGameList.Count;
+    //     drawCirclesInGameList.Add(newCircle);
+    // }
 }
 
