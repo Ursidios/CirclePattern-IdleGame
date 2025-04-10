@@ -211,8 +211,8 @@ public class SaveGameScript : MonoBehaviour
                 playerConfig.drawCirclesInGameList[i].GetComponent<CircleDrawScript>().RotationSpeedMulti = data.drawCircles[i].rotationSpeed;
             }
         }
-        
     }
+    
     void OnApplicationFocus(bool hasFocus)
     {
         if (!hasFocus) // Perdeu o foco, pode estar sendo fechado

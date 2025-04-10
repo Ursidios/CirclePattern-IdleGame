@@ -19,6 +19,7 @@ public class CosmeticUpgradesManager : MonoBehaviour
     public bool canBuyDraw;
     public GameObject popUpBlockDrawUpgrade;
 
+    public AudioSource buySoundSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -119,6 +120,8 @@ public class CosmeticUpgradesManager : MonoBehaviour
                     isShootingStar = true;
                     shootingStarParticle.SetActive(isShootingStar);
                 }
+
+                buySoundSource.Play();
 
 
                 return true;
