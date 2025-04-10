@@ -87,14 +87,5 @@ public class PlayerConfig : MonoBehaviour
         colorSelector = (colorSelector + 1) % circleColors.Length;
     }
 
-    // public void SpawnDrawCircle()
-    // {
-    //     GameObject newCircle = Instantiate(circleDrawPrefab, Vector3.zero, Quaternion.identity);
-    //     newCircle.GetComponent<CircleDrawScript>().speed = 1;
-    //     newCircle.GetComponent<CircleDrawScript>().RotationSpeedMulti = 1;
-
-    //     circleDrawAmount = drawCirclesInGameList.Count;
-    //     drawCirclesInGameList.Add(newCircle);
-    // }
 }
 
