@@ -205,15 +205,11 @@ public class SaveGameScript : MonoBehaviour
                 playerConfig.circlesInGameList[i].gameObject.transform.rotation = data.circleRotations[i];
             }
             
-            // for (int i = 0; i < data.drawCircles.Count; i++)
-            // {
-            //     if (i != 0)
-            //     {
-            //         playerConfig.SpawnDrawCircle();
-            //     }
-            //     playerConfig.drawCirclesInGameList[i].GetComponent<CircleDrawScript>().speed = data.drawCircles[i].speed;
-            //     playerConfig.drawCirclesInGameList[i].GetComponent<CircleDrawScript>().RotationSpeedMulti = data.drawCircles[i].rotationSpeed;
-            // }
+            for (int i = 0; i < data.drawCircles.Count; i++)
+            {
+                playerConfig.drawCirclesInGameList[i].GetComponent<CircleDrawScript>().speed = data.drawCircles[i].speed;
+                playerConfig.drawCirclesInGameList[i].GetComponent<CircleDrawScript>().RotationSpeedMulti = data.drawCircles[i].rotationSpeed;
+            }
         }
         
     }
