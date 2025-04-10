@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      balloon-heart-fill 1_0: -7235402235567097892
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

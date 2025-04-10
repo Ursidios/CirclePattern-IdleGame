@@ -107,7 +107,6 @@ MonoBehaviour:
   speed: 1.98
   RotationSpeedMulti: 3.7
   center: {x: 0, y: 0, z: 0}
-  angle: 0
 --- !u!1 &6348931431364548700
 GameObject:
   m_ObjectHideFlags: 0
