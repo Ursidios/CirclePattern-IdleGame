@@ -126,16 +126,16 @@ public class UiManager : MonoBehaviour
 
     public void ZoomInButton()
     {
-        targetFOV -= zoomAmount;
-
+        float adjustedZoom = zoomAmount / (targetFOV + 0.5f); // quanto maior o FOV, menor o valor subtraído
+        targetFOV -= adjustedZoom;
         saveGameScript.SaveAll();
         isStart = false;
     }
 
     public void ZoomOutButton()
     {
-        targetFOV += zoomAmount;
-
+        float adjustedZoom = zoomAmount / (targetFOV + 0.5f); // quanto maior o FOV, menor o valor subtraído
+        targetFOV += adjustedZoom;
         saveGameScript.SaveAll();
         isStart = false;
     }

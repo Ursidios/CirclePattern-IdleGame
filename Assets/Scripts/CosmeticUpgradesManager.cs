@@ -90,9 +90,11 @@ public class CosmeticUpgradesManager : MonoBehaviour
 
     public void ShootingStar(bool isStarting)
     {
-        if (!MoneyComparison(1, false))
-            return;
-        
+        if(!isStarting)
+        {
+            if (!MoneyComparison(1, false))
+                return;
+        }
     }
 
     public bool MoneyComparison(int UpgradeIndex, bool isStarting)
@@ -109,6 +111,7 @@ public class CosmeticUpgradesManager : MonoBehaviour
                 if(!isStarting)
                 {
                     playerConfig.moneySpecial -= cosmeticUpgrades[UpgradeIndex].moneyCost;
+                    buySoundSource.Play();
                 }
 
                 playerConfig.IncreaseSpecialMoneyMult(cosmeticUpgrades[UpgradeIndex].moneyPercentageIncrease);
@@ -121,7 +124,6 @@ public class CosmeticUpgradesManager : MonoBehaviour
                     shootingStarParticle.SetActive(isShootingStar);
                 }
 
-                buySoundSource.Play();
 
 
                 return true;

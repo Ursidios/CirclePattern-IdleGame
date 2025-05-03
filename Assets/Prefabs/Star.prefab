@@ -61,7 +61,7 @@ MonoBehaviour:
   playerConfig: {fileID: 0}
   unstableSound: {fileID: 6357018592947010997}
   collectSound: {fileID: 4867946185064160257}
-  vibrationIntervalMax: 0.5
+  vibrationIntervalMax: 1.5
   starParticle: {fileID: 2710804093112747025, guid: b596de828bce05444861580e9807bebd, type: 3}
 --- !u!61 &5734745114983646971
 BoxCollider2D:
@@ -107,7 +107,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.04, y: 2.04}
+  m_Size: {x: 3.5, y: 3.5}
   m_EdgeRadius: 0
 --- !u!212 &6096969365510900264
 SpriteRenderer:
