@@ -35,7 +35,7 @@ public class CircleDrawScript : MonoBehaviour
         }
 
         angle += speed * Time.fixedDeltaTime;
-        if (angle >= 360f) angle -= 360f;
+        //if (angle >= 360f) angle -= 360f;
 
         // Calcula a posição circular
         float x = center.x + Mathf.Cos(angle) * baseCircleRadius;

@@ -17,7 +17,11 @@ public class SettingsScript : MonoBehaviour
         SceneManager.LoadScene(0);
         PencilConfig.trailDuration = 0.5f;
     }
-
+    void Start()
+    {
+        Application.targetFrameRate = 60; // ou 90, 120, ou -1 para ilimitado
+        QualitySettings.vSyncCount = 0;   // desativa o VSync (essencial no Android)
+    }
     void Awake()
     {
 
