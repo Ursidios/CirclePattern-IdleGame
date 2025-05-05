@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 884204079534399750}
   - component: {fileID: 5734745114983646971}
   - component: {fileID: 6096969365510900264}
+  - component: {fileID: 7161925196910286319}
   m_Layer: 0
   m_Name: Star
   m_TagString: Untagged
@@ -63,6 +64,7 @@ MonoBehaviour:
   collectSound: {fileID: 4867946185064160257}
   vibrationIntervalMax: 1.5
   starParticle: {fileID: 2710804093112747025, guid: b596de828bce05444861580e9807bebd, type: 3}
+  anim: {fileID: 7161925196910286319}
 --- !u!61 &5734745114983646971
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -164,6 +166,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7161925196910286319
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405461275848729524}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 52f31f016b7fddb4e84470be6c098723, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4347198228740911100
 GameObject:
   m_ObjectHideFlags: 0

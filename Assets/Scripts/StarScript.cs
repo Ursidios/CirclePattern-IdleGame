@@ -28,6 +28,7 @@ public class StarScript : MonoBehaviour
 
     public GameObject starParticle;
     private GameObject newStarParticle;
+    public Animator anim;
 
     void Start()
     {
@@ -122,5 +123,13 @@ public class StarScript : MonoBehaviour
         
         collectSound.Play();
         //saveGameScript.SaveAll();
+    }
+    public void StartStarDie()
+    {
+        anim.Play("Star Fade");
+    }
+    public void StarDie()
+    {
+        Destroy(gameObject);
     }
 }

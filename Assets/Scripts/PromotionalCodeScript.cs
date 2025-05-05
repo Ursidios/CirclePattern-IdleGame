@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -5,7 +6,7 @@ using UnityEngine.Events;
 public class PromotionalCodeScript : MonoBehaviour
 {
     public TMP_InputField promotionalText;
-    public UnityEvent[] promotionalCodeEvent;
+    public Codes[] codes;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,10 +21,20 @@ public class PromotionalCodeScript : MonoBehaviour
 
     public void ConfirmPromotionalCode()
     {
-        if(promotionalText.text == "T.A.M.M")
+        for (int i = 0; i < codes.Length; i++)
         {
-            promotionalCodeEvent[0]?.Invoke();
-            promotionalText.text = "";
+            if(promotionalText.text == codes[i].code)
+            {
+                codes[i].promotionalCodeEvent?.Invoke();
+                promotionalText.text = "";
+            } 
         }
+
     }
+}
+[Serializable]
+public class Codes
+{
+    public UnityEvent promotionalCodeEvent;
+    public string code;
 }

@@ -11,6 +11,7 @@ public class StarSpawner : MonoBehaviour
     public Vector2 spawnMaxPosition;
     public List<GameObject> allStars;
     public int collectedStars;
+    public int maxVisibleStars;
     public TutorialScript tutorialScript;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,6 +28,13 @@ public class StarSpawner : MonoBehaviour
         {
             timerToSpawn = timerToSpawnMax;
             SpawnStar(false);
+        }
+
+        if(collectedStars >= maxVisibleStars)
+        {
+            allStars[0].GetComponent<StarScript>().StartStarDie();
+            allStars.Remove(allStars[0]);
+            collectedStars -= 1;
         }
     }
     public void AddCollectedStar()
