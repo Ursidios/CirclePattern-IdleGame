@@ -23372,6 +23372,7 @@ MonoBehaviour:
   canBuyDraw: 0
   popUpBlockDrawUpgrade: {fileID: 715551688}
   buySoundSource: {fileID: 457551778}
+  defealtColorButtons: {r: 0, g: 0.6745098, b: 1, a: 1}
 --- !u!1 &615503783
 GameObject:
   m_ObjectHideFlags: 0
@@ -28157,7 +28158,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1083320842
 MonoBehaviour:
   m_ObjectHideFlags: 0

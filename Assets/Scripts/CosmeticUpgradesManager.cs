@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CosmeticUpgradesManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class CosmeticUpgradesManager : MonoBehaviour
     public GameObject popUpBlockDrawUpgrade;
 
     public AudioSource buySoundSource;
+    public Color defealtColorButtons;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -55,10 +57,12 @@ public class CosmeticUpgradesManager : MonoBehaviour
         if(cosmeticUpgrades[0].level < upgradeManager.upgrades[3].level)
         {
             canBuyDraw = true;
+            cosmeticUpgrades[0].buttons.gameObject.GetComponent<Image>().color = defealtColorButtons;
         }
         else
         {
             canBuyDraw = false;
+            cosmeticUpgrades[0].buttons.gameObject.GetComponent<Image>().color = Color.red;
         }
     }
 
