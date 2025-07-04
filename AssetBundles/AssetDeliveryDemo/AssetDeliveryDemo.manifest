@@ -1,0 +1,20 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.0.23f1
+CRC: 899725125
+HashAppended: 0
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: controllerexample
+      Dependencies:
+        Dependency_0: gamepad
+    Info_1:
+      Name: galaxyexample
+      Dependencies:
+        Dependency_0: gamepad
+    Info_2:
+      Name: gamepad
+      Dependencies: {}
+    Info_3:
+      Name: undelivered
+      Dependencies: {}

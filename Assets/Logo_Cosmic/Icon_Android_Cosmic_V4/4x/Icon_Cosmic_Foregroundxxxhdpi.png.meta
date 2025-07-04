@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Icon_Cosmic_Foregroundxxxhdpi_0: 6972260080579587076
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.0.23f1
+CRC: 4015466217
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 47e7d56aada2f8a284db52b7d0c9f2cc
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 64278d5dce8d866506b62ace31b496e1
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/GooglePlayPlugins/com.google.play.assetdelivery/Samples/AssetDeliveryDemo/Scenes/UndeliveredFile.txt
+Dependencies: []

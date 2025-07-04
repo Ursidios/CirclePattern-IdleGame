@@ -22,6 +22,10 @@ public class StarSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (StartStoryScript.storyOn)
+        {
+            return;
+        }
         timerToSpawn -= Time.deltaTime;
 
         if(timerToSpawn <= 0)

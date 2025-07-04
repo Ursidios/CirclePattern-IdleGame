@@ -43,6 +43,16 @@ public class SaveGameScript : MonoBehaviour
     {
           
     }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            LoadPlayer();
+            LoadUpgrades();
+            LoadCosmeticUpgrades();
+            LoadSettings(); 
+        }
+    }
     public void SaveAll()
     {
         SaveCosmeticUpgrades();
@@ -54,26 +64,37 @@ public class SaveGameScript : MonoBehaviour
     {
         CosmeticUpgradeData data = new CosmeticUpgradeData
         {
-            starCount = starSpawner.collectedStars,   
+            starCount = starSpawner.collectedStars,
             drawCircleCount = cosmeticUpgradesManager.cosmeticUpgrades[0].level,
             shootingStarActivate = cosmeticUpgradesManager.isShootingStar,
-            cosmeticUpgrades = cosmeticUpgradesManager.cosmeticUpgrades
+            cosmeticUpgrades = cosmeticUpgradesManager.cosmeticUpgrades,
+            isInfiniteMode = cosmeticUpgradesManager.isInfiniteMode
         };
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(cosmeticUpgradeSavePath, json);
 
-        
     }
     public void LoadCosmeticUpgrades()
     {
-        if (File.Exists(upgradeSavePath))
+        if (File.Exists(cosmeticUpgradeSavePath))
         {
             string json = File.ReadAllText(cosmeticUpgradeSavePath);
             CosmeticUpgradeData data = JsonUtility.FromJson<CosmeticUpgradeData>(json);
+            cosmeticUpgradesManager.isInfiniteMode = data.isInfiniteMode;
+
+            if (cosmeticUpgradesManager.isInfiniteMode)
+            {
+                foreach (var item in cosmeticUpgradesManager.cosmeticUpgrades)
+                {
+                    item.maxLevel = 1000;
+                }
+
+                cosmeticUpgradesManager.allUpgradesInMax = false;
+            }
 
             cosmeticUpgradesManager.cosmeticUpgrades[1].level = data.cosmeticUpgrades[1].level;
             
-
+            print(data.drawCircleCount);
             for (int i = 0; i < data.starCount; i++)
             {
                 starSpawner.SpawnStar(true);
@@ -99,8 +120,8 @@ public class SaveGameScript : MonoBehaviour
             upgrades = upgradeManager.upgrades,
             trailDuration = PencilConfig.trailDuration,
             fieldOfView = upgradeManager.uiManager.MainCamera.fieldOfView,
-            timeSpeedDuration = uIScript.timeSpeedTimerMax
-            
+            timeSpeedDuration = uIScript.timeSpeedTimerMax,
+            isInfiniteMode = upgradeManager.isInfiniteMode
         };
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(upgradeSavePath, json);
@@ -112,16 +133,17 @@ public class SaveGameScript : MonoBehaviour
         {
             string json = File.ReadAllText(upgradeSavePath);
             UpgradeData data = JsonUtility.FromJson<UpgradeData>(json);
-            
+
             for (int i = 0; i < upgradeManager.upgrades.Length; i++)
             {
                 upgradeManager.upgrades[i].moneyCost = data.upgrades[i].moneyCost;
                 upgradeManager.upgrades[i].level = data.upgrades[i].level;
             }
-            
+
             PencilConfig.trailDuration = data.trailDuration;
             upgradeManager.uiManager.MainCamera.fieldOfView = data.fieldOfView;
             uIScript.timeSpeedTimerMax = data.timeSpeedDuration;
+            upgradeManager.isInfiniteMode = data.isInfiniteMode;
         }
     }
 
@@ -280,6 +302,7 @@ public class CosmeticUpgradeData
     public int drawCircleCount;
     public bool shootingStarActivate;
     public CosmeticUpgrades[] cosmeticUpgrades;
+    public bool isInfiniteMode;
 }
 
 [Serializable]
@@ -289,6 +312,7 @@ public class UpgradeData
     public float fieldOfView;
     public float trailDuration;
     public float timeSpeedDuration;
+    public bool isInfiniteMode;
 
 }
 [Serializable]

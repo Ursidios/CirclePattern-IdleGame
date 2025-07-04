@@ -1,0 +1,56 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.0.23f1
+CRC: 1864648946
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 1f968615dbe10c89b7262a15805a83db
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 16723e1ab0e8c03ef3a6b968eae5df98
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: a2b8e0af964c2986e43418413c85296e
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 20
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 89
+  Script: {instanceID: 0}
+- Class: 104
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3f34fbd24fca2411a8eb435431245fcf, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f2b93789829f44559b2a734e557e927d, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 157
+  Script: {instanceID: 0}
+- Class: 196
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+- Class: 258
+  Script: {instanceID: 0}
+- Class: 850595691
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/GooglePlayPlugins/com.google.play.assetdelivery/Samples/AssetDeliveryDemo/Scenes/GalaxyExample.unity
+Dependencies:
+- C:/Users/ursid/OneDrive/Documentos/Projetos/Unity/CirclePattern-IdleGame/AssetBundles/AssetDeliveryDemo/gamepad

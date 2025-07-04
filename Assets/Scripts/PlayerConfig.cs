@@ -33,8 +33,11 @@ public class PlayerConfig : MonoBehaviour
 
     void Update()
     {
-        MoneyRules(moneyMult);
-        SpecialMoneyRules(moneySpecialMult);
+        if (!StartStoryScript.storyOn)
+        {
+            MoneyRules(moneyMult);
+            SpecialMoneyRules(moneySpecialMult);    
+        }
     }
 
     public void IncreaseMoneyMult(float amount)

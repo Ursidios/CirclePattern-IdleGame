@@ -16,24 +16,49 @@ public class UpgradeManager : MonoBehaviour
 
     public GameObject moneyLossParent;
     public GameObject moneyLossTextObj;
+
+    public bool allUpgradesInMax;
+    public GameObject allInMaxText;
+    public bool isInfiniteMode;
+
     void Start()
     {
         playerConfig = GetComponent<PlayerConfig>();
-        savePath = Path.Combine(Application.persistentDataPath, "upgradeData.json");   
-       
+        savePath = Path.Combine(Application.persistentDataPath, "upgradeData.json");
+
     }
     void Update()
     {
+        if (isInfiniteMode)
+        {
+            foreach (var item in upgrades)
+            {
+                item.maxLevel = 1000;
+            }
+
+            allUpgradesInMax = false;
+        }
         foreach (var upgrade in upgrades)
         {
             upgrade.textCost.text = upgrade.moneyCost.ToString("$0.0");
 
-            if(upgrade.level >= upgrade.maxLevel)
+            if (upgrade.level >= upgrade.maxLevel)
             {
                 upgrade.buttons.SetActive(false);
             }
+            else
+            {
+                //Arrumar
+                if (upgrade.name != "Circle Size")
+                {
+                    if (upgrade.name != "More Circle")
+                    {
+                        upgrade.buttons.SetActive(true);
+                    }
+                }
+            }
 
-            if(upgrade.moneyCost > playerConfig.money)
+            if (upgrade.moneyCost > playerConfig.money)
             {
                 upgrade.buttons.GetComponent<CanvasGroup>().alpha = 0.4f;
             }
@@ -42,6 +67,30 @@ public class UpgradeManager : MonoBehaviour
                 upgrade.buttons.GetComponent<CanvasGroup>().alpha = 1;
             }
         }
+
+        if (!allUpgradesInMax)
+        {
+            for (int i = 0; i < upgrades.Length; i++)
+            {
+                int doneUpgradeCounter = 0;
+
+                foreach (var upgrade in upgrades)
+                {
+                    if (upgrade.level >= upgrade.maxLevel)
+                    {
+                        doneUpgradeCounter++;
+                    }
+                }
+
+                if (doneUpgradeCounter >= upgrades.Length)
+                {
+                    allUpgradesInMax = true;
+
+                    break;
+                }
+            }
+        }
+        allInMaxText.SetActive(allUpgradesInMax);
     }
 
     public void TimeSpeed(int index)
@@ -88,7 +137,7 @@ public class UpgradeManager : MonoBehaviour
             return;
 
 
-    
+
         Transform circleTransform = new GameObject("NewCircle").transform;
 
         playerConfig.SpawnCircle(new Vector3(1, 1, 1), circleTransform.position, circleTransform.rotation);
@@ -109,7 +158,7 @@ public class UpgradeManager : MonoBehaviour
 
     public bool MoneyComparison(int UpgradeIndex)
     {
-        if(upgrades[UpgradeIndex].level >= upgrades[UpgradeIndex].maxLevel)
+        if (upgrades[UpgradeIndex].level >= upgrades[UpgradeIndex].maxLevel)
         {
             return false;
         }
@@ -128,12 +177,21 @@ public class UpgradeManager : MonoBehaviour
                 buySoundSource.Play();
 
 
-                
+
                 return true;
             }
         }
 
         return false;
+    }
+    public void infinitMode()
+    {
+        foreach (var item in upgrades)
+        {
+            item.maxLevel = 1000;
+        }
+
+        isInfiniteMode = true;
     }
 }
 

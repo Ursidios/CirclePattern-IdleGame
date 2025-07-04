@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Logo_Cosmic_V2_0: -8357009047980808780
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
