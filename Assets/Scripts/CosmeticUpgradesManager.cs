@@ -38,6 +38,10 @@ public class CosmeticUpgradesManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isInfiniteMode)
+        {
+            allUpgradesInMax = false;
+        }
 
 
         foreach (var upgrade in cosmeticUpgrades)
@@ -130,16 +134,12 @@ public class CosmeticUpgradesManager : MonoBehaviour
 
     public void ShootingStar(bool isStarting)
     {
-        if (!isStarting)
-        {
-            if (!MoneyComparison(1, false))
-                return;
-        }
+        if (!MoneyComparison(1, false))
+            return;
     }
 
     public bool MoneyComparison(int UpgradeIndex, bool isStarting)
     {
-
         if (cosmeticUpgrades[UpgradeIndex].level >= cosmeticUpgrades[UpgradeIndex].maxLevel)
         {
             return false;
@@ -155,13 +155,12 @@ public class CosmeticUpgradesManager : MonoBehaviour
                 }
                 else
                 {
-                    
+
                 }
 
                 playerConfig.IncreaseSpecialMoneyMult(cosmeticUpgrades[UpgradeIndex].moneyPercentageIncrease);
                 cosmeticUpgrades[UpgradeIndex].moneyCost += cosmeticUpgrades[UpgradeIndex].moneyCost * (cosmeticUpgrades[UpgradeIndex].inflationPercentageCost / 100f);
                 cosmeticUpgrades[UpgradeIndex].level++;
-
                 if (UpgradeIndex == 1)
                 {
                     isShootingStar = true;
@@ -173,6 +172,7 @@ public class CosmeticUpgradesManager : MonoBehaviour
                 return true;
             }
         }
+        print(UpgradeIndex);
         return false;
     }
 

@@ -91,10 +91,9 @@ public class SaveGameScript : MonoBehaviour
 
                 cosmeticUpgradesManager.allUpgradesInMax = false;
             }
-
             cosmeticUpgradesManager.cosmeticUpgrades[1].level = data.cosmeticUpgrades[1].level;
             
-            print(data.drawCircleCount);
+            print(data.drawCircleCount + " 2");
             for (int i = 0; i < data.starCount; i++)
             {
                 starSpawner.SpawnStar(true);
@@ -254,6 +253,12 @@ public class SaveGameScript : MonoBehaviour
         {
             File.Delete(playerSavePath);
             Debug.Log("Player save file deleted.");
+        }
+        
+        if (File.Exists(cosmeticUpgradeSavePath))
+        {
+            File.Delete(cosmeticUpgradeSavePath);
+            Debug.Log("Cosmetic save file deleted.");
         }
     }
 
