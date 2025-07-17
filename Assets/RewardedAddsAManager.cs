@@ -14,6 +14,9 @@ public class RewardedAdsManager : MonoBehaviour
 
     private RewardedAd rewardedAd;
 
+    public AdOfferScript adOfferScript;
+    public PlayerConfig player;
+
     void Start()
     {
         MobileAds.Initialize(initStatus =>
@@ -22,7 +25,7 @@ public class RewardedAdsManager : MonoBehaviour
             LoadRewardedAd();
         });
 
-        ShowRewardedAd();
+        // ShowRewardedAd();
     }
 
     public void LoadRewardedAd()
@@ -71,6 +74,9 @@ public class RewardedAdsManager : MonoBehaviour
             {
                 Debug.Log($"Usuário recompensado! Tipo: {reward.Type}, Quantidade: {reward.Amount}");
                 // TODO: conceda a recompensa no seu jogo aqui
+
+                player.moneySpecial += adOfferScript.specialMoneyReward;
+                adOfferScript.gameObject.SetActive(false);
             });
         }
         else
